@@ -1,0 +1,1 @@
+A minimal implementation of Consistent Hashing algorithm in pure go.

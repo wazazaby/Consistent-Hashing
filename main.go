@@ -53,16 +53,12 @@ func (chr *ConsistentHashRing) GetNextNodeIndex(hash uint32) int {
 	}
 
 	for i, h := range chr.hashes {
-		if h >= hash {
+		if h > hash {
 			return i
 		}
 	}
 
-	if len(chr.hashes) > 0 {
-		return 0
-	}
-
-	return -1
+	return 0
 }
 
 func (chr *ConsistentHashRing) GetNode(hash string) *Node {
@@ -129,7 +125,6 @@ func (chr *ConsistentHashRing) RemoveNode(id string) {
 }
 
 func (chr *ConsistentHashRing) PrintRing() {
-	fmt.Println("Current Hash Ring Nodes:")
 	for _, h := range chr.hashes {
 		fmt.Printf("Node: %s \t\t Hash: %d \t\t Total Keys: %v\n", chr.nodes[h].ID, h, len(chr.nodes[h].Keys))
 	}
